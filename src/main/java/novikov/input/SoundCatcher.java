@@ -1,6 +1,6 @@
 package novikov.input;
 
-import novikov.entity.SoundCatcherResult;
+import novikov.entity.results.SoundCatcherResult;
 
 public interface SoundCatcher {
 

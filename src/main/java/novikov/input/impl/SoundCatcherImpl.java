@@ -1,6 +1,6 @@
 package novikov.input.impl;
 
-import novikov.entity.SoundCatcherResult;
+import novikov.entity.results.SoundCatcherResult;
 import novikov.input.SoundCatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

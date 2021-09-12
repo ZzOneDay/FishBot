@@ -1,4 +1,4 @@
-package novikov.entity;
+package novikov.entity.results;
 
 public enum SoundCatcherResult {
     FISH_ON_HOOK,
