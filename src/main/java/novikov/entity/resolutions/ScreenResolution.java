@@ -1,4 +1,4 @@
-package novikov.entity.resolution;
+package novikov.entity.resolutions;
 
 import java.awt.*;
 

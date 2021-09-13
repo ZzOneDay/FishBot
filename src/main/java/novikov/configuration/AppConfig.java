@@ -1,5 +1,7 @@
 package novikov.configuration;
 
+import novikov.entity.colors.ColorScopeEntity;
+import novikov.entity.resolutions.ScreenResolution;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
@@ -37,5 +39,42 @@ public class AppConfig {
                 channels,
                 signed,
                 bigEndian);
+    }
+
+    @Bean
+    ColorScopeEntity redFeather() {
+        return new ColorScopeEntity(
+                48, 61,
+                20, 60,
+                10, 50
+        );
+    }
+
+    @Bean
+    ColorScopeEntity blueFeather() {
+        return new ColorScopeEntity(
+                25, 50,
+                45, 91,
+                88, 157
+        );
+    }
+
+    @Bean
+    ColorScopeEntity whiteHook() {
+        return new ColorScopeEntity(
+                77, 92,
+                92, 112,
+                97, 111
+        );
+    }
+
+    @Bean
+    ScreenResolution screenResolution() {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int width = gd.getDisplayMode().getWidth();
+        int height = gd.getDisplayMode().getHeight();
+        return new ScreenResolution(width, height,
+                0.15, 0.24,
+                0.82, 0.65);
     }
 }

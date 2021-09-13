@@ -2,7 +2,7 @@ package novikov.services.impl;
 
 import junit.framework.TestCase;
 import novikov.configuration.AppConfig;
-import novikov.entity.resolution.ScreenResolution;
+import novikov.entity.resolutions.ScreenResolution;
 import novikov.services.TargetFinder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
