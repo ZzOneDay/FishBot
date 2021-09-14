@@ -1,5 +1,6 @@
 package novikov;
 
+import novikov.actions.MouseMover;
 import novikov.configuration.AppConfig;
 import novikov.input.SoundCatcher;
 import novikov.services.TargetFinder;
@@ -37,16 +38,20 @@ public class StartApplication {
 //        }
 
 
-        File img = new File("Screenshot_4.jpg");
-        BufferedImage image = ImageIO.read(img );
-        TargetFinder targetFinder = ctx.getBean(TargetFinder.class);
-        Point point1 = new Point(400,350);
-        Point point2 = new Point(2100,900);
+//        File img = new File("Screenshot_4.jpg");
+//        BufferedImage image = ImageIO.read(img );
+//        TargetFinder targetFinder = ctx.getBean(TargetFinder.class);
+//        Point point1 = new Point(400,350);
+//        Point point2 = new Point(2100,900);
+//
+//
+//        Point point = targetFinder.getTarget(image, point1, point2);
+//        System.out.println("X - " + point.getX() + "; Y - " + point.getY());
 
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        Point pointFinish = new Point(1400,800);
 
-        Point point = targetFinder.getTarget(image, point1, point2);
-        System.out.println("X - " + point.getX() + "; Y - " + point.getY());
-
-
+        MouseMover mouseMover = ctx.getBean(MouseMover.class);
+        mouseMover.move(point, pointFinish);
     }
 }

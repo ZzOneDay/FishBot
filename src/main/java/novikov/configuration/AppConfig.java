@@ -7,12 +7,14 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.sound.sampled.AudioFormat;
 import java.awt.*;
 
 @Configuration
 @ComponentScan("novikov")
+@PropertySource("classpath:application.properties")
 public class AppConfig {
     private static final Logger LOG = LogManager.getLogger(AppConfig.class);
 
