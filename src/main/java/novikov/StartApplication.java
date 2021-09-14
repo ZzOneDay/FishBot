@@ -48,10 +48,11 @@ public class StartApplication {
 //        Point point = targetFinder.getTarget(image, point1, point2);
 //        System.out.println("X - " + point.getX() + "; Y - " + point.getY());
 
-        Point point = MouseInfo.getPointerInfo().getLocation();
-        Point pointFinish = new Point(1400,800);
+        //Point pointStart = MouseInfo.getPointerInfo().getLocation();
+        Point pointStart = new Point(1200 ,1200);
+        Point pointFinish = new Point(400 ,400);
 
         MouseMover mouseMover = ctx.getBean(MouseMover.class);
-        mouseMover.move(point, pointFinish);
+        mouseMover.move(pointStart, pointFinish);
     }
 }

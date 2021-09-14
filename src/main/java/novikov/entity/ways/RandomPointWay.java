@@ -57,7 +57,7 @@ public class RandomPointWay implements Way {
             }
         } else {
             // <--------
-            for (int x = (int) point2.getX(); x > point1.getX(); x--) {
+            for (int x = (int) point1.getX(); x > point2.getX(); x--) {
                 way.add(new Point(x, lineEquation.getY(x)));
             }
         }
