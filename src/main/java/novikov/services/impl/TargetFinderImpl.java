@@ -62,10 +62,14 @@ public class TargetFinderImpl implements TargetFinder {
             sumOfX += point.getX();
             sumOfY += point.getY();
         }
-        int avgPointX = sumOfX / points.size();
-        int avgPointY = sumOfY / points.size();
-
-        return new Point(avgPointX, avgPointY);
+        try {
+            int avgPointX = sumOfX / points.size();
+            int avgPointY = sumOfY / points.size();
+            return new Point(avgPointX, avgPointY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        throw new IllegalArgumentException("Didn't find hook on screen");
     }
 
     private boolean checkColor(int rgbColor, ColorScopeEntity colorScope) {

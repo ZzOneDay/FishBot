@@ -3,6 +3,7 @@ package novikov.input.impl;
 import novikov.entity.results.SoundCatcherResult;
 import novikov.input.SoundCatcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.AudioFormat;
@@ -13,7 +14,9 @@ import java.io.ByteArrayOutputStream;
 
 @Service
 public class SoundCatcherImpl implements SoundCatcher {
-    private static final int LIMIT_WAITING_TIMES = 6000;
+
+    //@Value("${fishing.time.withoutHook.max}")
+    private static final long LIMIT_WAITING_TIMES = 23000000000L;
 
     @Autowired
     private AudioFormat audioFormat;
@@ -42,7 +45,7 @@ public class SoundCatcherImpl implements SoundCatcher {
             targetDataLine.open(audioFormat);
             targetDataLine.start();
 
-            int times = 0;
+            long times = 0;
             while (times < LIMIT_WAITING_TIMES) {
                 Thread.sleep(10);
                 times++;

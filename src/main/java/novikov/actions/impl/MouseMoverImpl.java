@@ -36,7 +36,11 @@ public class MouseMoverImpl implements MouseMover {
     private int speedTimeTo;
 
     @Override
-    public void move(Point start, Point finish) {
+    public boolean move(Point start, Point finish) {
+        if (start == null) {
+            start = MouseInfo.getPointerInfo().getLocation();
+        }
+
         LOG.info("Start moving, from {} to {}", start, finish);
         List<Point> way = randomPointWay.getWay(start, finish);
         setNewFinishPointInWay(way, generateNearPoint.createNearPoint(finish));
@@ -45,10 +49,12 @@ public class MouseMoverImpl implements MouseMover {
                 Thread.sleep(generateValue.getRandomValue(speedTimeFrom, speedTimeTo, Math.random()));
             } catch (InterruptedException e) {
                 LOG.error(e.getMessage());
+                return false;
             }
             robot.mouseMove((int) point.getX(), (int) point.getY());
         }
         LOG.info("Finish moving, from {} to {}", start, finish);
+        return true;
     }
 
     private void setNewFinishPointInWay(List<Point> way, Point newFinish) {

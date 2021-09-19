@@ -12,5 +12,5 @@ public interface MouseMover {
      * @param start  where is mouse now
      * @param finish where is a hook
      */
-    void move(Point start, Point finish);
+    boolean move(Point start, Point finish);
 }
