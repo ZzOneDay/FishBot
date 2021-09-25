@@ -79,4 +79,9 @@ public class AppConfig {
                 0.15, 0.24,
                 0.82, 0.65);
     }
+
+    @Bean
+    Dimension screenSystemSize() {
+        return Toolkit.getDefaultToolkit().getScreenSize();
+    }
 }
