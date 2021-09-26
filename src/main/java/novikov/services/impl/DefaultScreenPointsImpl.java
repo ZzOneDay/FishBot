@@ -23,6 +23,6 @@ public class DefaultScreenPointsImpl implements DefaultScreenPoints {
     public Point getPoint2() {
         double width = screenSystemSize.getWidth();
         double height = screenSystemSize.getHeight();
-        return new Point(((int) (width / 5 * 4)), ((int) (height / 6 * 4)));
+        return new Point(((int) (width / 5 * 3.5)), ((int) (height / 6 * 4)));
     }
 }
