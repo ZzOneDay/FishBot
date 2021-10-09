@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -91,6 +92,21 @@ public class TargetFinderImplTest extends TestCase {
 
         assertEquals(1300.0, point.getX(), 3);
         assertEquals(452.0, point.getY(), 3);
+    }
+
+    @Test
+    public void testTestGetTargetScreenshot_6Test() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_1_s.jpg")).getFile());
+        BufferedImage image = ImageIO.read(img);
+//        BufferedImage newImage = image.getSubimage(220,220,1536,864);
+//        File outputfile = new File("ofterSize.jpg");
+//        ImageIO.write(newImage, "jpg", outputfile);
+
+        Point point = targetFinder.getTarget(image);
+
+//        assertEquals(1300.0, point.getX(), 3);
+//        assertEquals(452.0, point.getY(), 3);
     }
 
     @Test

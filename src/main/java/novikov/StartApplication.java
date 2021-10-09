@@ -2,6 +2,7 @@ package novikov;
 
 import novikov.configuration.AppConfig;
 import novikov.services.DefaultScreenPoints;
+import novikov.services.impl.TargetFinderOpenCVImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.awt.*;
