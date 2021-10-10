@@ -23,10 +23,10 @@ public class GenerateRandomPointsTest extends TestCase {
 
     @Test
     public void testGetRandomPoints() {
-        Point point1 = new Point(400,800);
-        Point point2 = new Point(800,1440);
+        Point point1 = new Point(400, 800);
+        Point point2 = new Point(800, 1440);
 
-        List<Point> list = generateRandomPoints.generateRandomPoints(point1,point2, 20);
+        List<Point> list = generateRandomPoints.generateRandomPoints(point1, point2, 20);
         assertEquals(20, list.size());
         assertNotEquals(list.get(0), list.get(5));
     }

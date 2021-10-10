@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
 
 @Service
 public class ClickButtonImpl implements ClickButton {
@@ -37,7 +36,7 @@ public class ClickButtonImpl implements ClickButton {
             robot.mouseRelease(buttonId);
             return ClickResult.SUCCESS;
         } catch (InterruptedException e) {
-            LOG.error("Application didn't click: {} id,  {}", buttonId,  e.getMessage());
+            LOG.error("Application didn't click: {} id,  {}", buttonId, e.getMessage());
             return ClickResult.FAIL;
         }
     }

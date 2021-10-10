@@ -61,6 +61,8 @@ public class StartApplication {
                 if (application != null) {
                     application.interrupt();
                 }
+                Thread.currentThread().interrupt();
+                System.exit(0);
             }
         }
     }

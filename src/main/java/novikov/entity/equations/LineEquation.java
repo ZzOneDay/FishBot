@@ -38,7 +38,7 @@ public class LineEquation {
         return new LineEquation(indexA, newIndexB, newIndexC);
     }
 
-   public static LineEquation createLineOf2Points(Point point1, Point point2) {
+    public static LineEquation createLineOf2Points(Point point1, Point point2) {
         double x1 = point1.getX();
         double y1 = point1.getY();
 
@@ -53,8 +53,8 @@ public class LineEquation {
     }
 
     public static Point getCenterBetween2Points(Point point1, Point point2) {
-        int centreX = (int) (point1.getX() + point2.getX())/2;
-        int centreY = (int) (point1.getY() + point2.getY())/2;
+        int centreX = (int) (point1.getX() + point2.getX()) / 2;
+        int centreY = (int) (point1.getY() + point2.getY()) / 2;
         return new Point(centreX, centreY);
     }
 

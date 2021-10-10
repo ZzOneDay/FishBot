@@ -3,6 +3,7 @@ package novikov.services.impl;
 import novikov.entity.colors.ColorScopeEntity;
 import novikov.services.TargetFinder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
@@ -22,15 +23,11 @@ public class TargetFinderImpl implements TargetFinder {
     @Autowired
     private ColorScopeEntity whiteHook;
 
-    @Override
-    public Point getTarget(BufferedImage bufferedImage) {
-        Point point1 = new Point(bufferedImage.getMinX(), bufferedImage.getMinY());
-        Point point2 = new Point(bufferedImage.getWidth(), bufferedImage.getHeight());
-        return getTarget(bufferedImage, point1, point2);
-    }
+    @Value("${target.sensitivity.background}")
+    private int sensitivityOfBackground;
 
     @Override
-    public Point getTarget(BufferedImage bufferedImage, Point point1, Point point2) {
+    public Point getTarget(BufferedImage bufferedImage, BufferedImage backgroundImage, Point point1, Point point2) {
         int minX = (int) point1.getX();
         int maxX = (int) point2.getX();
 
@@ -40,34 +37,36 @@ public class TargetFinderImpl implements TargetFinder {
         List<Point> points = new ArrayList<>();
         for (int y = minY; y < maxY; y++) {
             for (int x = minX; x < maxX; x++) {
-                int argb = bufferedImage.getRGB(x, y);
-                if (checkColor(argb, redFeather)) {
+                int current = bufferedImage.getRGB(x, y);
+                if (backgroundImage != null && isLikeAsBackground(backgroundImage.getRGB(x, y), current)) {
+                    continue;
+                }
+                if (checkColor(current, redFeather)) {
                     Point point = new Point(x, y);
                     points.add(point);
                 }
-                if (checkColor(argb, blueFeather)) {
+                if (checkColor(current, blueFeather)) {
                     Point point = new Point(x, y);
                     points.add(point);
                 }
-                if (checkColor(argb, whiteHook)) {
+                if (checkColor(current, whiteHook)) {
                     Point point = new Point(x, y);
                     points.add(point);
                 }
             }
         }
 
-        int sumOfX = 0;
-        int sumOfY = 0;
-        for (Point point : points) {
-            sumOfX += point.getX();
-            sumOfY += point.getY();
-        }
-        try {
+        if (points.size() != 0) {
+            int sumOfX = 0;
+            int sumOfY = 0;
+            for (Point point : points) {
+                sumOfX += point.getX();
+                sumOfY += point.getY();
+            }
+
             int avgPointX = sumOfX / points.size();
             int avgPointY = sumOfY / points.size();
             return new Point(avgPointX, avgPointY);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         throw new IllegalArgumentException("Didn't find hook on screen");
     }
@@ -76,9 +75,24 @@ public class TargetFinderImpl implements TargetFinder {
         int red = (rgbColor >> 16) & 0xff;
         int green = (rgbColor >> 8) & 0xff;
         int blue = (rgbColor) & 0xff;
-        boolean hasRed = colorScope.getMinRed() < red && red < colorScope.getMaxRed();
-        boolean hasGreen = colorScope.getMinGreen() < green && green < colorScope.getMaxGreen();
-        boolean hasBlue = colorScope.getMinBlue() < blue && blue < colorScope.getMaxBlue();
+        boolean hasRed = colorScope.getMinRed() <= red && red <= colorScope.getMaxRed();
+        boolean hasGreen = colorScope.getMinGreen() <= green && green <= colorScope.getMaxGreen();
+        boolean hasBlue = colorScope.getMinBlue() <= blue && blue <= colorScope.getMaxBlue();
+        return hasRed && hasGreen && hasBlue;
+    }
+
+    private boolean isLikeAsBackground(int background, int current) {
+        int redCurrent = (current >> 16) & 0xff;
+        int greenCurrent = (current >> 8) & 0xff;
+        int blueCurrent = (current) & 0xff;
+
+        int redBackground = (background >> 16) & 0xff;
+        int greenBackground = (background >> 8) & 0xff;
+        int blueBackground = (background) & 0xff;
+
+        boolean hasRed = (Math.abs(redCurrent - redBackground)) < sensitivityOfBackground;
+        boolean hasGreen = (Math.abs(greenCurrent - greenBackground)) < sensitivityOfBackground;
+        boolean hasBlue = (Math.abs(blueCurrent - blueBackground)) < sensitivityOfBackground;
         return hasRed && hasGreen && hasBlue;
     }
 }

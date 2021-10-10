@@ -1,7 +1,9 @@
-package novikov.services.impl;
+package novikov.actions.impl;
 
 import junit.framework.TestCase;
+import novikov.actions.MouseMover;
 import novikov.configuration.AppConfigTest;
+import novikov.services.impl.DefaultScreenPointsImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +15,15 @@ import java.awt.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfigTest.class, loader = AnnotationConfigContextLoader.class)
-public class DefaultScreenPointsImplTest extends TestCase {
+public class MouseMoverImplTest extends TestCase {
 
     @Autowired
-    DefaultScreenPointsImpl defaultScreenPoints;
+    MouseMover mouseMover;
 
     @Test
-    public void testGetPoint1() {
-        Point point1 = defaultScreenPoints.getPoint1();
-        assertEquals(341.0, point1.getX());
-        assertEquals(164.0, point1.getY());
-    }
-
-    @Test
-    public void testGetPoint2() {
-        Point point2 = defaultScreenPoints.getPoint2();
-        assertEquals(1536.0, point2.getX());
-        assertEquals(720.0, point2.getY());
+    public void test() {
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(2000,1000);
+        //mouseMover.move(point1, point2);
     }
 }

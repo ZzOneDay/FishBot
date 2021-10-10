@@ -2,7 +2,6 @@ package novikov.services.impl;
 
 import junit.framework.TestCase;
 import novikov.configuration.AppConfig;
-import novikov.entity.resolutions.ScreenResolution;
 import novikov.services.TargetFinder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,82 +24,122 @@ public class TargetFinderImplTest extends TestCase {
     @Autowired
     TargetFinder targetFinder;
 
-    @Autowired
-    ScreenResolution screenResolution;
-
     @Test
-    public void testTestGetTargetScreenshot_1Test() throws IOException {
+    public void testGetTargetWithBackground1() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_1.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point1 = new Point(400, 350);
-        Point point2 = new Point(2100, 900);
-        Point point = targetFinder.getTarget(image, point1, point2);
+        File background = new File(Objects.requireNonNull(classLoader.getResource("withBackground/back1.jpg")).getFile());
+        BufferedImage backgroundImage = ImageIO.read(background);
 
-        assertEquals(1366.0, point.getX(), 3);
-        assertEquals(506.0, point.getY(), 3);
+        File fish = new File(Objects.requireNonNull(classLoader.getResource("withBackground/fish1.jpg")).getFile());
+        BufferedImage fishImage = ImageIO.read(fish);
+        int width = fishImage.getWidth();
+        int height = fishImage.getHeight();
+
+        Point point1 = new Point((width / 6), (height / 7));
+        Point point2 = new Point((width / 8 * 6), (height / 8 * 5));
+        Point point = targetFinder.getTarget(fishImage, backgroundImage, point1, point2);
+
+        markPoint(point, fishImage);
+
+        assertEquals(1228, point.getX(), 10);
+        assertEquals(709.0, point.getY(), 10);
     }
 
     @Test
-    public void testTestGetTargetScreenshot_2Test() throws IOException {
+    public void testGetTargetWithBackground2() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_2.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point1 = new Point(400, 350);
-        Point point2 = new Point(2100, 900);
-        Point point = targetFinder.getTarget(image, point1, point2);
+        File background = new File(Objects.requireNonNull(classLoader.getResource("withBackground/back2.jpg")).getFile());
+        BufferedImage backgroundImage = ImageIO.read(background);
 
-        assertEquals(1435.0, point.getX(), 3);
-        assertEquals(541.0, point.getY(), 3);
+        File fish = new File(Objects.requireNonNull(classLoader.getResource("withBackground/fish2.jpg")).getFile());
+        BufferedImage fishImage = ImageIO.read(fish);
+        int width = fishImage.getWidth();
+        int height = fishImage.getHeight();
+
+        Point point1 = new Point((width / 6), (height / 7));
+        Point point2 = new Point((width / 8 * 6), (height / 8 * 5));
+        Point point = targetFinder.getTarget(fishImage, backgroundImage, point1, point2);
+
+        markPoint(point, fishImage);
+
+        assertEquals(1215.0, point.getX(), 10);
+        assertEquals(792.0, point.getY(), 10);
     }
 
     @Test
-    public void testTestGetTargetScreenshot_3Test() throws IOException {
+    public void testGetTargetWithBackground3() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_3.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point1 = new Point(400, 350);
-        Point point2 = new Point(2100, 900);
-        Point point = targetFinder.getTarget(image, point1, point2);
+        File background = new File(Objects.requireNonNull(classLoader.getResource("withBackground/back3.jpg")).getFile());
+        BufferedImage backgroundImage = ImageIO.read(background);
 
-        assertEquals(1223, point.getX(), 3);
-        assertEquals(463.0, point.getY(), 3);
+        File fish = new File(Objects.requireNonNull(classLoader.getResource("withBackground/fish3.jpg")).getFile());
+        BufferedImage fishImage = ImageIO.read(fish);
+        int width = fishImage.getWidth();
+        int height = fishImage.getHeight();
+
+        Point point1 = new Point((width / 6), (height / 7));
+        Point point2 = new Point((width / 8 * 6), (height / 8 * 5));
+        Point point = targetFinder.getTarget(fishImage, backgroundImage, point1, point2);
+
+        markPoint(point, fishImage);
+
+        assertEquals(1395, point.getX(), 10);
+        assertEquals(508.0, point.getY(), 10);
     }
 
     @Test
-    public void testTestGetTargetScreenshot_4Test() throws IOException {
+    public void testGetTargetWithBackground4() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_4.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point1 = new Point(400, 350);
-        Point point2 = new Point(2100, 900);
-        Point point = targetFinder.getTarget(image, point1, point2);
+        File background = new File(Objects.requireNonNull(classLoader.getResource("withBackground/back4.jpg")).getFile());
+        BufferedImage backgroundImage = ImageIO.read(background);
 
-        assertEquals(1335.0, point.getX(), 3);
-        assertEquals(427.0, point.getY(), 3);
+        File fish = new File(Objects.requireNonNull(classLoader.getResource("withBackground/fish4.jpg")).getFile());
+        BufferedImage fishImage = ImageIO.read(fish);
+        int width = fishImage.getWidth();
+        int height = fishImage.getHeight();
+
+        Point point1 = new Point((width / 6), (height / 7));
+        Point point2 = new Point((width / 8 * 6), (height / 8 * 5));
+        Point point = targetFinder.getTarget(fishImage, backgroundImage, point1, point2);
+
+        markPoint(point, fishImage);
+
+        assertEquals(1276, point.getX(), 10);
+        assertEquals(629.0, point.getY(), 10);
     }
 
     @Test
-    public void testTestGetTargetScreenshot_5Test() throws IOException {
+    public void testGetTargetWithBackground5() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_5.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point1 = new Point(400, 350);
-        Point point2 = new Point(2100, 900);
-        Point point = targetFinder.getTarget(image, point1, point2);
+        File background = new File(Objects.requireNonNull(classLoader.getResource("withBackground/back5.jpg")).getFile());
+        BufferedImage backgroundImage = ImageIO.read(background);
 
-        assertEquals(1300.0, point.getX(), 3);
-        assertEquals(452.0, point.getY(), 3);
+        File fish = new File(Objects.requireNonNull(classLoader.getResource("withBackground/fish5.jpg")).getFile());
+        BufferedImage fishImage = ImageIO.read(fish);
+        int width = fishImage.getWidth();
+        int height = fishImage.getHeight();
+
+        Point point1 = new Point((width / 6), (height / 7));
+        Point point2 = new Point((width / 8 * 6), (height / 8 * 5));
+        Point point = targetFinder.getTarget(fishImage, backgroundImage, point1, point2);
+
+        markPoint(point, fishImage);
+
+        assertEquals(1270, point.getX(), 10);
+        assertEquals(681.0, point.getY(), 10);
     }
 
-    @Test
-    public void testTestGetTargetResolution_Test() throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File img = new File(Objects.requireNonNull(classLoader.getResource("Screenshot_1.jpg")).getFile());
-        BufferedImage image = ImageIO.read(img);
-        Point point = targetFinder.getTarget(image, screenResolution.getTargetFramePoint1(), screenResolution.getTargetFramePoint2());
+    private void markPoint(Point point, BufferedImage image) {
+        for (int i = -50; i < 50; i++) {
+            image.setRGB((int) point.getX() + i, (int) point.getY() - 1, Color.RED.getRGB());
+            image.setRGB((int) point.getX() + i, (int) point.getY(), Color.RED.getRGB());
+            image.setRGB((int) point.getX() + i, (int) point.getY() + 1, Color.RED.getRGB());
+        }
 
-        assertEquals(1366.0, point.getX(), 3);
-        assertEquals(506.0, point.getY(), 3);
+        for (int i = -50; i < 50; i++) {
+            image.setRGB((int) point.getX() - 1, (int) point.getY() + i, Color.RED.getRGB());
+            image.setRGB((int) point.getX(), (int) point.getY() + i, Color.RED.getRGB());
+            image.setRGB((int) point.getX() + 1, (int) point.getY() + i, Color.RED.getRGB());
+        }
     }
 }

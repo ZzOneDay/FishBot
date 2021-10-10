@@ -10,5 +10,4 @@ public interface SoundCatcher {
      * @return result likes 'I catch something' or 'Time is over'
      */
     SoundCatcherResult catchLoudSound();
-
 }

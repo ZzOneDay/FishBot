@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 
 /**
  * Test version 0.01b
- *
  */
 @Service
 public class ApplicationRunner implements Runnable {
@@ -58,19 +57,22 @@ public class ApplicationRunner implements Runnable {
             throw new RuntimeException("Start got result - Error");
         }
         while (!Thread.currentThread().isInterrupted()) {
-            waitTime(1000,3000);
+            //Get SCREEN FOR BACKGROUND
+            BufferedImage background = getScreen();
+
+            waitTime(1000, 3000);
             //THROW HOOK
             boolean throwHook = actionThrowHook();
             if (!throwHook) {
                 throw new RuntimeException("Throw hook without SUCCESS");
             }
 
-            waitTime(1500,2000);
+            waitTime(1500, 2000);
             //GET SCREEN WITH HOOK
             BufferedImage screen = getScreen();
 
             //FINDING HOOK
-            Point targetPoint = targetFinder.getTarget(screen, point1, point2);
+            Point targetPoint = targetFinder.getTarget(screen, background, point1, point2);
 
             //Moving mouse
             boolean resultOfMoving = mouseMover.move(null, targetPoint);
@@ -91,7 +93,7 @@ public class ApplicationRunner implements Runnable {
 
             //FISH ON HOOK, NEED TO CLICK ON HERE.
             boolean click = actionCheckFish();
-            waitTime(800,1800);
+            waitTime(800, 1800);
             if (!click) {
                 throw new RuntimeException("didn't get hook from water. without SUCCESS");
             } else {
@@ -99,12 +101,12 @@ public class ApplicationRunner implements Runnable {
                 successFish++;
             }
         }
-        System.out.println("Finish of Fishing: count success is " +successFish);
+        System.out.println("Finish of Fishing: count success is " + successFish);
     }
 
     private void waitTime(int min, int max) {
         try {
-            Thread.sleep(generateValue.getRandomValue(min,max, Math.random()));
+            Thread.sleep(generateValue.getRandomValue(min, max, Math.random()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -112,7 +114,7 @@ public class ApplicationRunner implements Runnable {
 
 
     private boolean startApplicationInConsole() {
-        for (int i = 5; i > 0; i--) {
+        for (int i = 10; i > 0; i--) {
             System.out.println("Start: " + i);
             try {
                 Thread.sleep(1000);

@@ -14,15 +14,11 @@ public class DefaultScreenPointsImpl implements DefaultScreenPoints {
 
     @Override
     public Point getPoint1() {
-        double width = screenSystemSize.getWidth();
-        double height = screenSystemSize.getHeight();
-        return new Point(((int) width / 5), (int) (height / 6));
+        return new Point((screenSystemSize.width / 6), (screenSystemSize.height / 7));
     }
 
     @Override
     public Point getPoint2() {
-        double width = screenSystemSize.getWidth();
-        double height = screenSystemSize.getHeight();
-        return new Point(((int) (width / 5 * 3.5)), ((int) (height / 6 * 4)));
+        return new Point((screenSystemSize.width / 8 * 6), (screenSystemSize.height / 8 * 5));
     }
 }

@@ -11,10 +11,12 @@ import java.awt.*;
 @ComponentScan("novikov")
 @PropertySource("classpath:application.properties")
 public class AppConfigTest {
+
+    //2560x1480 x 1.25 scale
     @Bean
     Dimension screenSystemSize() {
         Dimension dimension = new Dimension();
-        dimension.setSize(2560, 1440);
+        dimension.setSize(2048, 1152);
         return dimension;
     }
 }

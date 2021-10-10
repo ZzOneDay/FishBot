@@ -21,13 +21,15 @@ public class RandomPointWayTest extends TestCase {
 
     @Test
     public void testCreateWayCheckStartAndFinish() {
-        Point point1 = new Point(400,800);
-        Point point2 = new Point(800,1440);
+        Point point1 = new Point(400, 800);
+        Point point2 = new Point(800, 1440);
 
         List<Point> points = randomPointWay.getWay(point1, point2);
+        Point finish = points.get(points.size() - 1);
+
         assertEquals(point1, points.get(0));
-        assertEquals(point2, points.get(points.size() - 1));
+        assertEquals(point2.getX(), finish.getX(), 20);
+        assertEquals(point2.getY(), finish.getY(), 20);
         assertTrue(points.size() > 5);
     }
-
 }
